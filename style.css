@@ -1,63 +1,53 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+body {
+  display: grid;
+  height: 100vh;
+  place-content: center;
   font-family: sans-serif;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: rgb(84, 65, 103);
-}
-
-main {
-  width: 500px;
-  box-sizing: content-box;
-  padding: 40px;
-  background-color: #fff;
-}
-
-.wrapper {
+.container {
   display: grid;
+  grid-template-columns: 180px 180px 180px 180px;
   gap: 10px;
-  place-content: center;
 }
 
-.card-container {
-  height: 150px;
+.carta {
   position: relative;
 }
 
-.card-before,
-.card-after {
-  backface-visibility: hidden;
+.atras {
   position: absolute;
+  background-color: orange;
+  height: 100%;
+  width: 100%;
+  font-size: 40px;
+  font-weight: bolder;
+  display: grid;
+  place-content: center;
+  transition: all 500ms ease;
+  backface-visibility: hidden;
+}
+
+.frente {
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
   transition: all 500ms ease;
 }
 
-.card-before {
-  font-size: 20px;
-  font-weight: bolder;
-  background-color: orange;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-after {
-  border: 5px solid black;
-  background-color: #fff;
-  transform: rotateY(180deg);
-}
-
-.flipped .card-before {
-  transform: rotateY(180deg);
-}
-.flipped .card-after {
+.carta-virada .frente {
   transform: rotateY(0deg);
+}
+
+.carta-virada .atras {
+  transform: rotateY(180deg);
+}
+
+button {
+  border: none;
+  padding: 20px;
+  width: 250px;
+  margin-top: 20px;
+  font-size: 17px;
+  font-weight: bold;
+  justify-self: center;
 }

@@ -1,78 +1,69 @@
-const container = document.querySelector(".wrapper");
-let card;
-let primeirCarta = "";
+const container = document.querySelector(".container");
+const botoaReiniciar = document.querySelector("button");
+let cartas;
+let primeiraCarta = "";
 let segundaCarta = "";
 
-const items = [
-  { nome: "panda", imagem: "/imagem/panda.png" },
-  { nome: "cobra", imagem: "/imagem/cobra.jpg" },
-  { nome: "tigre", imagem: "/imagem/tigre.jpg" },
+botoaReiniciar.addEventListener("click", () => location.reload());
+
+let items = [
+  { nome: "gato", imagem: "/imagem/gato.jpg" },
   { nome: "cachorro", imagem: "/imagem/cachorro.jpg" },
-  { nome: "jacare", imagem: "/imagem/jacare.jpg" },
+  { nome: "coelho", imagem: "/imagem/coelho.jpg" },
+  { nome: "elefante", imagem: "/imagem/elefante.jpg" },
+  { nome: "girafa", imagem: "/imagem/girafa.jpg" },
   { nome: "leao", imagem: "/imagem/leao.jpg" },
-  { nome: "macaco", imagem: "/imagem/macaco.jpg" },
-  { nome: "girafa", imagem: "/imagem/girafa.png" },
+  { nome: "panda", imagem: "/imagem/panda.jpg" },
+  { nome: "tigre", imagem: "/imagem/tigre.jpg" },
 ];
 
 function criarCartas() {
-  let itemDuplicado = [...items, ...items];
-  let personagens = itemDuplicado.sort(() => Math.random() - 0.5);
+  let itemsDuplicados = [...items, ...items];
+  let personagens = itemsDuplicados.sort(() => Math.random() - 0.5);
 
-  for (let i = 0; i < personagens.length; i++) {
+  personagens.map((personagen) => {
     container.innerHTML += `
-      <div class="card-container" data-card = ${personagens[i].nome}>       
-       <div class="card-before">?</div>
-       <div class="card-after">
-       <img src=${personagens[i].imagem} width="120" heigth="120" />
-       </div>
-     </div>`;
-  }
+    <div class="carta" data-carta=${personagen.nome}>
+    <div class="atras">?</div>
+    <div class="frente">
+      <img src=${personagen.imagem} width="180px" height="180px" />
+    </div>`;
+  });
 }
-
 criarCartas();
 
-function checarCartas(card) {
-  let primeiroPersonagem = primeirCarta.getAttribute("data-card");
-  let segundoPersonagem = segundaCarta.getAttribute("data-card");
+function virarCarta() {
+  cartas = document.querySelectorAll(".carta");
 
-  if (primeiroPersonagem == segundoPersonagem) {
-    primeirCarta = "";
-    segundaCarta = "";
-  } else if (primeirCarta != segundaCarta) {
-    setTimeout(() => {
-      primeirCarta.classList.remove("flipped");
-      segundaCarta.classList.remove("flipped");
-      primeirCarta = "";
-      segundaCarta = "";
-    }, 600);
-  }
-}
-
-function revelarCarta() {
-  card = document.querySelectorAll(".card-container");
-
-  card.forEach((card) => {
-    card.addEventListener("click", () => {
-      if (card.classList.contains("flipped")) {
-        return;
-      }
-
-      if (primeirCarta == "") {
-        card.classList.add("flipped");
-        primeirCarta = card;
+  cartas.forEach((carta) => {
+    carta.addEventListener("click", () => {
+      if (primeiraCarta == "") {
+        carta.classList.add("carta-virada");
+        primeiraCarta = carta;
       } else if (segundaCarta == "") {
-        card.classList.add("flipped");
-        segundaCarta = card;
-
-        checarCartas(card);
+        carta.classList.add("carta-virada");
+        segundaCarta = carta;
+        checarCartas(carta);
       }
     });
   });
 }
-revelarCarta();
+virarCarta();
 
-function jogo() {
-  container.style.gridTemplateColumns = "repeat(4, 120px)";
+function checarCartas() {
+  const primeiroPersonagem = primeiraCarta.getAttribute("data-carta");
+  const segundoPersonagem = segundaCarta.getAttribute("data-carta");
+
+  if (primeiroPersonagem == segundoPersonagem) {
+    primeiraCarta = "";
+    segundaCarta = "";
+  } else {
+    setTimeout(() => {
+      primeiraCarta.classList.remove("carta-virada");
+      segundaCarta.classList.remove("carta-virada");
+
+      primeiraCarta = "";
+      segundaCarta = "";
+    }, 600);
+  }
 }
-
-jogo();
