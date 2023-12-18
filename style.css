@@ -13,6 +13,7 @@ body {
 
 .carta {
   position: relative;
+  cursor: pointer;
 }
 
 .atras {
@@ -50,4 +51,5 @@ button {
   font-size: 17px;
   font-weight: bold;
   justify-self: center;
+  cursor: pointer;
 }

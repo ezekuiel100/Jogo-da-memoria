@@ -19,14 +19,14 @@ let items = [
 
 function criarCartas() {
   let itemsDuplicados = [...items, ...items];
-  let personagens = itemsDuplicados.sort(() => Math.random() - 0.5);
+  let animais = itemsDuplicados.sort(() => Math.random() - 0.5);
 
-  personagens.map((personagen) => {
+  animais.map((animal) => {
     container.innerHTML += `
-    <div class="carta" data-carta=${personagen.nome}>
+    <div class="carta" data-carta=${animal.nome}>
     <div class="atras">?</div>
     <div class="frente">
-      <img src=${personagen.imagem} width="180px" height="180px" />
+      <img src=${animal.imagem} width="180px" height="180px" />
     </div>`;
   });
 }
@@ -51,10 +51,10 @@ function virarCarta() {
 virarCarta();
 
 function checarCartas() {
-  const primeiroPersonagem = primeiraCarta.getAttribute("data-carta");
-  const segundoPersonagem = segundaCarta.getAttribute("data-carta");
+  const primeiroAnimal = primeiraCarta.getAttribute("data-carta");
+  const segundoAnimal = segundaCarta.getAttribute("data-carta");
 
-  if (primeiroPersonagem == segundoPersonagem) {
+  if (primeiroAnimal == segundoAnimal) {
     primeiraCarta = "";
     segundaCarta = "";
   } else {
